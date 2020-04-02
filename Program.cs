@@ -10,7 +10,9 @@ namespace Imobiliaria
     {
         static void Main(string[] args)
         {
-            var json = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + @"\imoveis.json");
+            string path = @"C:\TEMP\Arquivo_JSON.json";
+
+            var json = File.ReadAllText(path);
             List<Imoveis> imoveis = JsonConvert.DeserializeObject<List<Imoveis>>(json);
 
             foreach (var item in imoveis)
@@ -315,14 +317,14 @@ namespace Imobiliaria
                     item.Valor_aluguel = item.Valor_aluguel.ToString().Replace(".", ",");
                 }
             }
-            string path = @"C:\TEMP\JsonTratado.json";
+            string path2 = @"C:\TEMP\JsonTratado.json";
             XmlSerializer xmlSerializer = new XmlSerializer(imoveis.GetType());
             xmlSerializer.Serialize(Console.Out, imoveis);
 
-            File.WriteAllText(path, JsonConvert.SerializeObject(imoveis));
+            File.WriteAllText(path2, JsonConvert.SerializeObject(imoveis));
 
             Console.Clear();
-            Console.WriteLine("TRATAMENTO CONCLUÍDO: " + path);
+            Console.WriteLine("TRATAMENTO CONCLUÍDO: " + path2);
             Console.ReadKey();
         }
     }
