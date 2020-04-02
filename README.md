@@ -1,0 +1,5 @@
+# TratamentoJSON
+
+OBSERVAÇÃO:
+
+ANTES DE EXECUTAR, CRIE A PASTA: C:\TEMP\
