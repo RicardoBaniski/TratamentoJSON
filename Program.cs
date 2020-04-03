@@ -90,6 +90,10 @@ namespace Imobiliaria
                 {
                     item.Sacada = "NAO";
                 }
+                if (item.Sacada == "S")
+                {
+                    item.Sacada = "SIM";
+                }
                 if (item.Sacada == null)
                 {
                     item.Sacada = "NAO INFORMADO";
@@ -100,6 +104,10 @@ namespace Imobiliaria
                 if (item.Portaria == "NÃO" || item.Portaria == "N")
                 {
                     item.Portaria = "NAO";
+                }
+                if (item.Portaria == "S")
+                {
+                    item.Portaria = "SIM";
                 }
                 if (item.Portaria == null)
                 {
@@ -112,6 +120,10 @@ namespace Imobiliaria
                 {
                     item.Elevador = "NAO";
                 }
+                if (item.Elevador == "S")
+                {
+                    item.Elevador = "SIM";
+                }
                 if (item.Elevador == null)
                 {
                     item.Elevador = "NAO INFORMADO";
@@ -119,13 +131,17 @@ namespace Imobiliaria
 
                 // CHURRASQUEIRA
                 item.Churrasqueira = item.Churrasqueira.ToUpper();
-                if (item.Churrasqueira.Contains("SIM"))
+                if (item.Churrasqueira.Contains("SIM") || item.Churrasqueira == "S")
                 {
                     item.Churrasqueira = "PRIVATIVA";
                 }
                 if (item.Churrasqueira.Contains("NÃO"))
                 {
                     item.Churrasqueira = "NAO";
+                }
+                if (item.Churrasqueira == null)
+                {
+                    item.Churrasqueira = "NAO INFORMADO";
                 }
 
                 // DORMITORIOS
@@ -305,7 +321,9 @@ namespace Imobiliaria
                 else
                 {
                     item.Valor_venda = item.Valor_venda.ToString().Replace("R$", "");
+                    item.Valor_venda = item.Valor_venda.ToString().Replace(".", ",");
                 }
+
                 // VALOR ALUGUEL
                 if (item.Valor_aluguel == null)
                 {
@@ -317,10 +335,11 @@ namespace Imobiliaria
                     item.Valor_aluguel = item.Valor_aluguel.ToString().Replace(".", ",");
                 }
             }
+
             string path2 = @"C:\TEMP\JsonTratado.json";
+            
             XmlSerializer xmlSerializer = new XmlSerializer(imoveis.GetType());
             xmlSerializer.Serialize(Console.Out, imoveis);
-
             File.WriteAllText(path2, JsonConvert.SerializeObject(imoveis));
 
             Console.Clear();
