@@ -8,9 +8,12 @@ namespace Imobiliaria
 {
     class Program
     {
-        static void Main(string[] args)
+        private const string V = @"C:\TEMP\Arquivo_JSON.json";
+        private const string V1 = @"C:\TEMP\JsonTratado.json";
+
+        private static void Main(string[] args)
         {
-            string path = @"C:\TEMP\Arquivo_JSON.json";
+            string path = V;
 
             var json = File.ReadAllText(path);
             List<Imoveis> imoveis = JsonConvert.DeserializeObject<List<Imoveis>>(json);
@@ -50,14 +53,14 @@ namespace Imobiliaria
                 item.Area_total = item.Area_total.Replace(".", ",");
                 if (!item.Area_total.Contains(","))
                 {
-                    item.Area_total = item.Area_total + ",00";
+                    item.Area_total += ",00";
                 }
 
                 // AREA PRIVATIVA
                 item.Area_privativa = item.Area_privativa.Replace(".", ",");
                 if (!item.Area_privativa.Contains(","))
                 {
-                    item.Area_privativa = item.Area_privativa + ",00";
+                    item.Area_privativa += ",00";
                 }
 
                 // CONDOMINIO
@@ -68,7 +71,7 @@ namespace Imobiliaria
                 }
                 if (!item.Condominio.Contains(","))
                 {
-                    item.Condominio = item.Condominio + ",00";
+                    item.Condominio += ",00";
                 }
                 else
                 {
@@ -336,8 +339,8 @@ namespace Imobiliaria
                 }
             }
 
-            string path2 = @"C:\TEMP\JsonTratado.json";
-            
+            string path2 = V1;
+
             XmlSerializer xmlSerializer = new XmlSerializer(imoveis.GetType());
             xmlSerializer.Serialize(Console.Out, imoveis);
             File.WriteAllText(path2, JsonConvert.SerializeObject(imoveis));
